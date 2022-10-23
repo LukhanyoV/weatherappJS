@@ -156,5 +156,5 @@ app.get("/api/:date/avg", async (req, res) => {
 
 module.exports = app
 
-const PORT = process.env.PORT || 50003
+const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`🚀 App running on port: ${PORT}`))
