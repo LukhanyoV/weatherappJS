@@ -81,7 +81,9 @@
             }
         }
     });
-    aggr.addEventListener("change", e => {
+    
+    const updateChart = e => {
+        if(aggr.value === "" || set.value === "") return
         if (aggr.value === "all") {
             myChart.data.datasets = [{
                 label: "Min "+set.value,
@@ -124,5 +126,7 @@
             }]
         }
         myChart.update()
-    })
+    }
+    aggr.addEventListener("change", updateChart)
+    set.addEventListener("change", updateChart)
 </script>
