@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="head">
+        <h2>Weather Trend App</h2>
+    </div>
+
+    <div class="controls">
+        <h4>Choose weather element to inspect:</h4>
+        <label for="{{this}}">
+            <select id="chooseElement">
+                <option value="" disabled selected>select element</option>
+                {{#each elements}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+    </div>
+
+    <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+        <canvas id="myChart" width="400" height="400"></canvas>
+        <center>
+            <em>
+                <h3>Hourly Data</h3>
+            </em>
+        </center>
+    </div>
+
+</div>
+<script>
+    const elements = "temperature,wind_speed,wind_direction,precipitation,humidity,visibility,pressure,cloud_cover,dew_point,wind_gust".split(",")
+    const dataMap = {}
+    const { data: dataJSON } = {{{ data }}};
+    dataJSON.forEach(el => {
+        let { time } = el
+        if (dataMap[time] === undefined) {
+            dataMap[time] = {
+                rows: []
+            }
+        }
+        dataMap[time]['rows'].push({
+            name: el.name,
+            value: el.value
+        })
+    })
+    const labels = Object.keys(dataMap)
+
+    const dataSets = {}
+    elements.forEach(element => {
+        dataSets[element] = [{
+            label: element,
+            data: dataJSON.filter(el => el.name == element).map(el => el.value),
+            backgroundColor: "#705DF4",
+            borderColor: "#282828",
+            borderWidth: 1
+        }]
+    })
+</script>
+<script>
+    let datasets = []
+    const set = document.querySelector("#chooseElement")
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels,
+            datasets
+        },
+        options: {
+            maintainAspectRatio: false,
+
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    set.addEventListener("change", e => {
+        myChart.data.datasets = dataSets[e.target.value]
+        myChart.update()
+    })
+</script>

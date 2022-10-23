@@ -1,0 +1,97 @@
+body, html, ul {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+nav {
+    height: 50;
+    background-color: rgb(104, 107, 110);
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+}
+
+nav ul li h3 {
+    font-style: italic;
+    font-size: larger;
+    color: white;
+}
+
+nav ul li a {
+    color: #fff;
+    font-size: large;
+    text-align: center;
+}
+
+.error {
+    color: tomato;
+}
+
+.form {
+    margin: 10;
+}
+
+.form > * {
+    padding: 1em;
+}
+
+.forms {
+    display: flex;
+    justify-content: space-around;
+}
+
+.form-parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin: 10px;
+    width: 250px;
+    border-left: 0;
+    border-top: 0;
+    box-shadow: 4px 4px 4px black;
+}
+
+input {
+    width: 100%;
+}
+
+input:hover {
+    cursor: pointer;
+}
+
+.btn {
+    display: flex;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-transform: uppercase;
+    padding: 10px;
+    background-color: rgb(146, 146, 146);
+    color: white;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(255, 240, 240);
+    width: 100vw;
+    color: #282822;
+    text-align: center;
+}

@@ -1,0 +1,128 @@
+<div class="container">
+    <div class="head">
+        <h2>Weather Trend App</h2>
+    </div>
+
+    <div class="controls">
+        <h4>Choose weather element to inspect:</h4>
+        <label for="{{this}}">
+            <select id="chooseElement">
+                <option value="" disabled selected>select element</option>
+                {{#each elements}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+        </label>
+        <label for="aggr">
+            <select id="chooseAggregate">
+                <option value="" disabled selected>select aggregate</option>
+                <option value="min">min</option>
+                <option value="max">max</option>
+                <option value="avg">avg</option>
+                <option value="all">all</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+        <canvas id="myChart" width="400" height="400"></canvas>
+        <center>
+            <em>
+                <h3>Daily Data</h3>
+            </em>
+        </center>
+    </div>
+
+</div>
+<script>
+    const elements = "temperature,wind_speed,wind_direction,precipitation,humidity,visibility,pressure,cloud_cover,dew_point,wind_gust".split(",")
+    const dataMap = {}
+    const { data: dataJSON } = {{{ data }}};
+    dataJSON.forEach(el => {
+        let { date } = el
+        if (dataMap[date] === undefined) {
+            dataMap[date] = {
+                rows: []
+            }
+        }
+        dataMap[date]['rows'].push({
+            name: el.name,
+            value: el.value
+        })
+    })
+    const labels = Object.keys(dataMap)
+
+    const dataSets = {}
+</script>
+<script>
+    let datasets = []
+    const set = document.querySelector("#chooseElement")
+    const aggr = document.querySelector("#chooseAggregate")
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                label: "",
+                data: [],
+                backgroundColor: "#705DF4",
+                borderColor: "#282828",
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    aggr.addEventListener("change", e => {
+        if (aggr.value === "all") {
+            myChart.data.datasets = [{
+                label: "Min "+set.value,
+                data: dataJSON.filter(el => el.name == set.value).map(el => {
+                    return el.min;
+                }),
+                backgroundColor: "#8ecae6",
+                borderColor: "#282828",
+                borderWidth: 1
+            },
+            {
+                label: "Max: "+set.value,
+                data: dataJSON.filter(el => el.name == set.value).map(el => {
+                    return el.max;
+                }),
+                backgroundColor: "#d62828",
+                borderColor: "#282828",
+                borderWidth: 1
+            },
+            {
+                label: "Avg: "+set.value,
+                data: dataJSON.filter(el => el.name == set.value).map(el => {
+                    return el.avg;
+                }),
+                backgroundColor: "#0077b6",
+                borderColor: "#282828",
+                borderWidth: 1
+            }]
+        } else {
+            myChart.data.datasets = [{
+                label: aggr.value+": "+set.value,
+                data: dataJSON.filter(el => el.name == set.value).map(el => {
+                    if (aggr.value === "min") return el.min;
+                    if (aggr.value === "max") return el.max;
+                    if (aggr.value === "avg") return el.avg;
+                }),
+                backgroundColor: "#705DF4",
+                borderColor: "#282828",
+                borderWidth: 1
+            }]
+        }
+        myChart.update()
+    })
+</script>

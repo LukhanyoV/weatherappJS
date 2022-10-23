@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="head">
+        <h2>Weather Trend App</h2>
+    </div>
+
+    {{#if messages.error}}
+    <div class="error flash">
+        <p>
+            <em>Error: </em>
+            {{messages.error}}
+        </p>
+    </div>
+    {{/if}}
+
+    <div class="forms">
+
+        <div class="form-parent">
+            <h3>
+                <em>Choose day to analyze:</em>
+            </h3>
+            <form action="/day" method="post" class="form">
+               <div class="form-element">
+                    <div>
+                        <h4>Day:</h4> 
+                    </div>
+                    <div>
+                        <input type="date" name="date" min="2011-07-01" max="2018-10-28">
+                    </div>
+                </div>
+                <div class="form-element">
+                    <button class="btn" type="submit">check</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-parent">
+            <h3>
+                <em>Choose month to analyze:</em>
+            </h3>
+            <form action="/month" method="post" class="form">
+                <div class="form-element">
+                    <div>
+                        <h4>Month:</h4> 
+                    </div>
+                    <div>
+                        <input type="month" name="date" min="2011-07" max="2018-10">
+                    </div>
+                </div>
+                <div class="form-element">
+                    <button class="btn" type="submit">check</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
