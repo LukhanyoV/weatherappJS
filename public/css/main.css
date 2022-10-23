@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&display=swap');
+
+* {
+    font-family: 'Fuzzy Bubbles', cursive;
+}
+
 body, html, ul {
     margin: 0;
     padding: 0;
@@ -9,11 +15,12 @@ body, html, ul {
     align-items: center;
     flex-direction: column;
     background-color: #fff;
+    min-height: 80vh;
 }
 
 nav {
     height: 50;
-    background-color: rgb(104, 107, 110);
+    background-color: rgb(44, 121, 197);
 }
 
 nav ul {
@@ -62,7 +69,7 @@ nav ul li a {
     width: 250px;
     border-left: 0;
     border-top: 0;
-    box-shadow: 4px 4px 4px black;
+    box-shadow: 2px 2px 2px rgb(114, 200, 221);
 }
 
 input {
