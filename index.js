@@ -46,7 +46,7 @@ app.use(express.static("public"))
 
 // ROUTES
 // show date picker form
-const url = "http://localhost:5000"
+let url = "http://localhost:5000"
 if(process.env.NODE_ENV === "production"){
     url = "https://weathertrendapp.herokuapp.com"
 }
