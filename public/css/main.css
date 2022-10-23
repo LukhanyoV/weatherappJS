@@ -57,7 +57,6 @@ nav ul li a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     border: 1px solid black;
     margin: 10px;
     width: 250px;
@@ -99,7 +98,8 @@ input:hover {
 
 
 @media only screen and (max-width: 600px) {
-    .form-parent {
+    .forms {
         flex-direction: column;
+        flex-wrap: wrap;
     }
 }
