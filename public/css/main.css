@@ -75,6 +75,7 @@ nav ul li a {
     border-left: 0;
     border-top: 0;
     box-shadow: 2px 2px 2px rgb(114, 200, 221);
+    padding: 0.5em;
 }
 
 input {
@@ -93,6 +94,7 @@ input:hover {
     padding: 10px;
     background-color: rgb(146, 146, 146);
     color: white;
+    background: #38BFFF;
 }
 
 .btn:hover {
