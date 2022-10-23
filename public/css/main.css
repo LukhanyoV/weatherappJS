@@ -96,3 +96,10 @@ input:hover {
     color: #282822;
     text-align: center;
 }
+
+
+@media only screen and (max-width: 600px) {
+    .form-parent {
+        flex-direction: column;
+    }
+}
