@@ -89,6 +89,7 @@ input:hover {
 
 .body {
     position: relative;
+    min-height: 100vh;
 }
 
 #footer {
